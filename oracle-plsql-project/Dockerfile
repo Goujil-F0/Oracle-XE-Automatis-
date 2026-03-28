@@ -10,9 +10,7 @@ ENV APP_USER_PASSWORD=${APP_USER_PASSWORD}
 RUN mkdir -p /opt/oracle/logs
 
 # Copier les scripts SQL (ils seront exécutés automatiquement)
-COPY ./scripts/*.sql /container-entrypoint-initdb.d/
+COPY scripts/ /container-entrypoint-initdb.d/
 
-# Rendre les scripts exécutables
-RUN chmod +x /container-entrypoint-initdb.d/*.sql
 
 EXPOSE 1521 5500

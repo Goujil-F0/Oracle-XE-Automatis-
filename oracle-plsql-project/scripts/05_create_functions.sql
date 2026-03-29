@@ -1,5 +1,9 @@
 -- 05_create_functions.sql -- Fonctions stockées 
  -- Fonction pour calculer le salaire annuel 
+ALTER SESSION SET CONTAINER = XEPDB1;
+ALTER SESSION SET CURRENT_SCHEMA = mon_user;
+
+
 CREATE OR REPLACE FUNCTION get_annual_salary(p_emp_id IN NUMBER) 
 RETURN NUMBER 
 AS 

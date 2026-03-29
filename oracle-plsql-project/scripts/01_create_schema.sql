@@ -4,12 +4,6 @@
 -- Connexion en tant que SYSTEM pour créer l'utilisateur
 ALTER SESSION SET CONTAINER = XEPDB1;
 
--- Créer l'utilisateur principal (sera utilisé par l'application)
--- Note : les variables APP_USER et APP_USER_PASSWORD de Docker créent déjà l'user, 
--- mais ce script assure les droits et la configuration.
-CREATE USER mon_user IDENTIFIED BY mon_mdp
-DEFAULT TABLESPACE USERS
-QUOTA UNLIMITED ON USERS;
 
 -- Accorder les privilèges de base
 GRANT CONNECT, RESOURCE, CREATE SESSION, CREATE TABLE, CREATE PROCEDURE, 

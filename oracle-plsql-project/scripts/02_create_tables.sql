@@ -1,4 +1,8 @@
 -- 02_create_tables.sql
+
+ALTER SESSION SET CONTAINER = XEPDB1;
+ALTER SESSION SET CURRENT_SCHEMA = mon_user;
+
 -- Création des tables avec contraintes
 
 -- Table des départements

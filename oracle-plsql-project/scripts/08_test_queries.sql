@@ -1,4 +1,7 @@
 -- 08_test_queries.sql -- Requêtes de test et démonstration 
+ALTER SESSION SET CONTAINER = XEPDB1;
+ALTER SESSION SET CURRENT_SCHEMA = mon_user;
+
  
 SET SERVEROUTPUT ON; 
  
@@ -177,11 +180,14 @@ END;
  
 / 
  -- Test 10: Rapports finaux 
+DECLARE
+    v_total_salary NUMBER; -- Variable pour stocker la somme
 BEGIN 
     DBMS_OUTPUT.PUT_LINE(CHR(10) || '=' || RPAD('=', 70, '=')); 
     DBMS_OUTPUT.PUT_LINE('RÉSUMÉ FINAL'); 
     DBMS_OUTPUT.PUT_LINE('=' || RPAD('=', 70, '=')); 
      
+    -- Résumé des compteurs
     FOR summary IN ( 
         SELECT 'Employés' as type, COUNT(*) as count FROM employees 
         UNION ALL 
@@ -191,13 +197,13 @@ BEGIN
         UNION ALL 
         SELECT 'Affectations', COUNT(*) FROM employee_projects 
     ) LOOP 
-        DBMS_OUTPUT.PUT_LINE(RPAD(summary.type, 15) || ': ' || 
-summary.count); 
+        DBMS_OUTPUT.PUT_LINE(RPAD(summary.type, 15) || ': ' || summary.count); 
     END LOOP; 
      
-    DBMS_OUTPUT.PUT_LINE('Masse salariale totale: ' ||  
-                         TO_CHAR((SELECT SUM(salary) FROM employees), 
-'999,999,999.00')); 
+    -- CALCUL DE LA MASSE SALARIALE (La correction est ici)
+    SELECT SUM(salary) INTO v_total_salary FROM employees;
+    
+    DBMS_OUTPUT.PUT_LINE('Masse salariale totale: ' || TO_CHAR(v_total_salary, '999,999,999.00')); 
      
     DBMS_OUTPUT.PUT_LINE('=' || RPAD('=', 70, '=')); 
     DBMS_OUTPUT.PUT_LINE('✅ TOUS LES TESTS SONT PASSÉS AVEC SUCCÈS'); 

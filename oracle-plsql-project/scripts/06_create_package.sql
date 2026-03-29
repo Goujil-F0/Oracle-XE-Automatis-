@@ -1,4 +1,8 @@
 -- 06_create_package.sql -- Package complet pour la gestion des employés 
+ALTER SESSION SET CONTAINER = XEPDB1;
+ALTER SESSION SET CURRENT_SCHEMA = mon_user;
+
+
  
 CREATE OR REPLACE PACKAGE employee_manager AS 
      
